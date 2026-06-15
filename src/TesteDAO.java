@@ -19,10 +19,10 @@ public class TesteDAO {
         }
 
 
-        Cliente cliente = dao.buscarPorId(3);
+        /*Cliente cliente = dao.buscarPorId(3);
         cliente.setNome("Hugo");
 
-        dao.alterar(cliente);
+        dao.alterar(cliente);*/
 
 
     }

@@ -29,3 +29,4 @@ replay_pid*
 /target/
 /.idea/
 *.class
+config.properties
