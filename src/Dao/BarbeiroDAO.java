@@ -1,7 +1,7 @@
 package Dao;
 
 import Database.Conexao;
-import Model.Cliente;
+import Model.Barbeiro;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class BarbeiroDAO {
 
-    public void inserir(Cliente barbeiro) {
+    public void inserir(Barbeiro barbeiro) {
 
         String sql = "INSERT INTO barbeiros (nome, telefone) VALUES (?, ?)";
 
@@ -34,16 +34,16 @@ public class BarbeiroDAO {
 
             stmt.executeUpdate();
 
-            System.out.println("Cliente inserido com sucesso!");
+            System.out.println("Barbeiro inserido com sucesso!");
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public List<Cliente> listar() {
+    public List<Barbeiro> listar() {
 
-        List<Cliente> barbeiros = new ArrayList<>();
+        List<Barbeiro> barbeiros = new ArrayList<>();
 
         String sql = "SELECT * FROM barbeiros";
 
@@ -55,7 +55,7 @@ public class BarbeiroDAO {
 
             while (rs.next()) {
 
-                Cliente barbeiro = new Cliente(); // Instancia o objeto
+                Barbeiro barbeiro = new Barbeiro(); // Instancia o objeto
 
                 barbeiro.setId(rs.getInt("idbarbeiros")); // Atribui os valores do ResultSet
                 barbeiro.setNome(rs.getString("nome"));
@@ -71,8 +71,8 @@ public class BarbeiroDAO {
         return barbeiros;
     }
 
-    public Cliente buscarPorId(int id){
-        Cliente barbeiro = null; // Começa como null. Se não achar ninguém no banco, retorna null.
+    public Barbeiro buscarPorId(int id){
+        Barbeiro barbeiro = null; // Começa como null. Se não achar ninguém no banco, retorna null.
         String sql = "SELECT * FROM barbeiros WHERE idbarbeiros = ?";
 
         try (
@@ -87,7 +87,7 @@ public class BarbeiroDAO {
 
                 // 3. Verificamos se o banco encontrou o barbeiro
                 if (rs.next()) {
-                    barbeiro = new Cliente(); // Instancia o objeto apenas se ele existir
+                    barbeiro = new Barbeiro(); // Instancia o objeto apenas se ele existir
                     barbeiro.setId(rs.getInt("idbarbeiros"));
                     barbeiro.setNome(rs.getString("nome"));
                     barbeiro.setTelefone(rs.getString("telefone"));
@@ -102,6 +102,8 @@ public class BarbeiroDAO {
         return barbeiro;
     }
 
+
+
     public void excluir(int id){
         String sql = "DELETE FROM barbeiros WHERE idbarbeiros = ?";
 
@@ -113,7 +115,6 @@ public class BarbeiroDAO {
 
             stmt.setInt(1, id);
 
-            stmt.executeUpdate();
 
             int linhas = stmt.executeUpdate();
 
@@ -129,7 +130,7 @@ public class BarbeiroDAO {
 
     }
 
-    public void alterar(Cliente barbeiro){
+    public void alterar(Barbeiro barbeiro){
         String sql = " UPDATE barbeiros SET nome = ?, telefone = ? WHERE idbarbeiros = ?";
 
         try (

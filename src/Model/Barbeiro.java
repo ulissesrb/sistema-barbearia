@@ -11,8 +11,7 @@ public class Barbeiro {
     }
 
     // Construtor com todos os atributos
-    public Barbeiro(int id, String nome, String telefone) {
-        this.id = id;
+    public Barbeiro(String nome, String telefone) {
         this.nome = nome;
         this.telefone = telefone;
     }

@@ -16,8 +16,8 @@ public class ClienteDAO {
         String sql = "INSERT INTO clientes (nome, telefone) VALUES (?, ?)";
 
         try (
-                Connection conn = Conexao.conectar();
-                PreparedStatement stmt = conn.prepareStatement(sql);
+                Connection conn = Conexao.conectar(); // Conecta ao banco
+                PreparedStatement stmt = conn.prepareStatement(sql); // Prepara a query
         ) {
 
             stmt.setString(1, cliente.getNome());
@@ -112,7 +112,6 @@ public class ClienteDAO {
 
             stmt.setInt(1, id);
 
-            stmt.executeUpdate();
 
             int linhas = stmt.executeUpdate();
 
@@ -140,7 +139,6 @@ public class ClienteDAO {
             stmt.setString(2, cliente.getTelefone());
             stmt.setInt(3, cliente.getId());
 
-            stmt.executeUpdate();
 
             int linhas = stmt.executeUpdate();
 

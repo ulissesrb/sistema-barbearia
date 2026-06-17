@@ -11,8 +11,7 @@ public class Cliente {
     }
 
     // Construtor com todos os atributos
-    public Cliente(int id, String nome, String telefone) {
-        this.id = id;
+    public Cliente(String nome, String telefone) {
         this.nome = nome;
         this.telefone = telefone;
     }

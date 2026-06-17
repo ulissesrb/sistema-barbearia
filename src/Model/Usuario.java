@@ -4,39 +4,41 @@ public class Usuario {
 
     private int id;
     private String login;
-    private String telefone;
+    private String senha;
 
     // Construtor vazio
     public Usuario() {
     }
 
     // Construtor com todos os atributos
-    public Usuario(int id, String login, String telefone) {
-        this.id = id;
+    public Usuario( String login, String senha) {
         this.login = login;
-        this.telefone = telefone;
+        this.senha = senha;
     }
 
-    // Getters
+  // Getters e Setters
     public int getId() {
         return id;
     }
 
-    public String getNome() {
+    public String getLogin() {
         return login;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getSenha() {
+        return senha;
     }
 
-    // Setters
 
-    public void setNome(String login) {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setLogin(String login) {
         this.login = login;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }
