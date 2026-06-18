@@ -141,14 +141,14 @@ public class AgendamentoDAO {
 
                     // 1. Criamos o objeto Cliente e preenchemos os dados que vieram do JOIN
                     Cliente cliente = new Cliente();
-                    cliente.setId(rs.getInt("idclientes"));
+                    cliente.setId(rs.getInt("cliente_id"));
                     cliente.setNome(rs.getString("nome_cliente"));
                     agendamento.setCliente(cliente); // Coloca o cliente dentro do agendamento
 
                     // 2. Criamos o objeto Barbeiro e preenchemos os dados que vieram do JOIN
                     Barbeiro barbeiro = new Barbeiro();
-                    barbeiro.setId(rs.getInt("idbarbeiros"));
-                    barbeiro.setNome(rs.getString("nome"));
+                    barbeiro.setId(rs.getInt("barbeiro_id"));
+                    barbeiro.setNome(rs.getString("nome_barbeiro"));
                     agendamento.setBarbeiro(barbeiro); // Coloca o barbeiro dentro do agendamento
 
                     // 3. Convertemos as datas do MySQL (Date e Time) para o Java moderno (LocalDate e LocalTime)
@@ -163,8 +163,77 @@ public class AgendamentoDAO {
     }
 
     public Agendamento buscarPorDataEHora(LocalDate data, LocalTime hora){
-    return null;
+        Agendamento agendamento = null; // se não encontrar, é null
+
+        // O comando JOIN junta as tabelas pelos IDs correspondentes
+        String sql = "SELECT a.*, c.nome AS nome_cliente, b.nome AS nome_barbeiro " +
+                "FROM agendamentos a " +
+                "INNER JOIN clientes c ON a.cliente_id = c.idclientes " +
+                "INNER JOIN barbeiros b ON a.barbeiro_id = b.idbarbeiros " +
+                "WHERE a.data = ? AND a.hora = ?";
+
+        try (
+                Connection conn = Conexao.conectar();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+        ) {
+            stmt.setDate(1, java.sql.Date.valueOf(data));
+            stmt.setTime(2, java.sql.Time.valueOf(hora));
+
+            try (ResultSet rs = stmt.executeQuery()) { // Executa a query e guarda no ResultSet
+                if (rs.next()) {
+                    agendamento = new Agendamento();
+                    agendamento.setId(rs.getInt("id")); // Nome da PK na tabela agendamentos
+
+                    // 1. Criamos o objeto Cliente e preenchemos os dados que vieram do JOIN
+                    Cliente cliente = new Cliente();
+                    cliente.setId(rs.getInt("cliente_id"));
+                    cliente.setNome(rs.getString("nome_cliente"));
+                    agendamento.setCliente(cliente); // Coloca o cliente dentro do agendamento
+
+                    // 2. Criamos o objeto Barbeiro e preenchemos os dados que vieram do JOIN
+                    Barbeiro barbeiro = new Barbeiro();
+                    barbeiro.setId(rs.getInt("barbeiro_id"));
+                    barbeiro.setNome(rs.getString("nome_barbeiro"));
+                    agendamento.setBarbeiro(barbeiro); // Coloca o barbeiro dentro do agendamento
+
+                    // 3. Convertemos as datas do MySQL (Date e Time) para o Java moderno (LocalDate e LocalTime)
+                    agendamento.setData(rs.getDate("data").toLocalDate());
+                    agendamento.setHora(rs.getTime("hora").toLocalTime());
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return agendamento;
     }
+
+    public void alterar(Agendamento agendamento){
+        String sql = " UPDATE agendamentos SET data = ?, hora = ? WHERE id = ?";
+
+        try (
+                Connection conn = Conexao.conectar();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+        ) {
+
+            stmt.setDate(1, java.sql.Date.valueOf(agendamento.getData()));
+            stmt.setTime(2, java.sql.Time.valueOf(agendamento.getHora()));
+            stmt.setInt(3, agendamento.getId());
+
+
+            int linhas = stmt.executeUpdate();
+
+            if (linhas > 0) {
+                System.out.println("Operação realizada com sucesso.");
+            } else {
+                System.out.println("Nenhum registro foi encontrado.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public void excluir(int id) {
         String sql = "DELETE FROM agendamentos WHERE id = ?";

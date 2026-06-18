@@ -142,7 +142,7 @@ public class BarbeiroDAO {
             stmt.setString(2, barbeiro.getTelefone());
             stmt.setInt(3, barbeiro.getId());
 
-            stmt.executeUpdate();
+
 
             int linhas = stmt.executeUpdate();
 
