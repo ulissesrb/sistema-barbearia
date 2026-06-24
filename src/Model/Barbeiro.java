@@ -39,4 +39,9 @@ public class Barbeiro {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+    @Override
+    public String toString() {
+        return this.nome; // este método retorna o nome do barbeiro quando chamado
+    }
 }

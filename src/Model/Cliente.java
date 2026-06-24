@@ -40,4 +40,10 @@ public class Cliente {
     }
 
     public void setId(int id) {this.id = id;}
+
+    @Override
+    public String toString() {
+        return this.nome; // este método retorna o nome do cliente quando chamado
+    }
 }
+

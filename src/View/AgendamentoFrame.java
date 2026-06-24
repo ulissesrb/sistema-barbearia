@@ -311,11 +311,11 @@ public class AgendamentoFrame extends JFrame {
             return;
 
         cbClientes.setSelectedItem(
-                agendamento.getCliente()
+                agendamento.getCliente().getNome()
         );
 
         cbBarbeiros.setSelectedItem(
-                agendamento.getBarbeiro()
+                agendamento.getBarbeiro().getNome()
         );
 
         txtData.setText(
