@@ -45,5 +45,23 @@ public class Cliente {
     public String toString() {
         return this.nome; // este método retorna o nome do cliente quando chamado
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) return true;
+
+        if (!(obj instanceof Cliente)) return false;
+
+        Cliente outro = (Cliente) obj;
+
+        return id == outro.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
+    }
 }
 

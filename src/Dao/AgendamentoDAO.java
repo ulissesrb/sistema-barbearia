@@ -208,16 +208,21 @@ public class AgendamentoDAO {
     }
 
     public void alterar(Agendamento agendamento){
-        String sql = " UPDATE agendamentos SET data = ?, hora = ? WHERE id = ?";
+        String sql =
+                "UPDATE agendamentos " +
+                        "SET cliente_id = ?, barbeiro_id = ?, data = ?, hora = ? " +
+                        "WHERE id = ?";
 
         try (
                 Connection conn = Conexao.conectar();
                 PreparedStatement stmt = conn.prepareStatement(sql);
         ) {
 
-            stmt.setDate(1, java.sql.Date.valueOf(agendamento.getData()));
-            stmt.setTime(2, java.sql.Time.valueOf(agendamento.getHora()));
-            stmt.setInt(3, agendamento.getId());
+            stmt.setInt(1, agendamento.getCliente().getId());
+            stmt.setInt(2, agendamento.getBarbeiro().getId());
+            stmt.setDate(3, java.sql.Date.valueOf(agendamento.getData()));
+            stmt.setTime(4, java.sql.Time.valueOf(agendamento.getHora()));
+            stmt.setInt(5, agendamento.getId());
 
 
             int linhas = stmt.executeUpdate();
