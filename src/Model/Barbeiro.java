@@ -44,4 +44,25 @@ public class Barbeiro {
     public String toString() {
         return this.nome; // este método retorna o nome do barbeiro quando chamado
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) return true;
+
+        if (!(obj instanceof Barbeiro)) return false;
+
+        Barbeiro outro = (Barbeiro) obj;
+
+        return id == outro.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
+    }
+
+
 }
+
