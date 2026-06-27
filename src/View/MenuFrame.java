@@ -8,6 +8,7 @@ public class MenuFrame extends JFrame {
     private JButton btnClientes;
     private JButton btnBarbeiros;
     private JButton btnAgendamentos;
+    private JButton btnUsuarios;
     private JButton btnLogout;
     private JButton btnSair;
 
@@ -44,10 +45,12 @@ public class MenuFrame extends JFrame {
         btnClientes = new JButton("Clientes");
         btnBarbeiros = new JButton("Barbeiros");
         btnAgendamentos = new JButton("Agendamentos");
+        btnUsuarios = new JButton("Usuários");
 
         painelCentro.add(btnClientes);
         painelCentro.add(btnBarbeiros);
         painelCentro.add(btnAgendamentos);
+        painelCentro.add(btnUsuarios);
 
         painelPrincipal.add(painelCentro, BorderLayout.CENTER);
 
@@ -85,6 +88,13 @@ public class MenuFrame extends JFrame {
 
             dispose();
             new AgendamentoFrame();
+
+        });
+
+        btnUsuarios.addActionListener(e -> {
+
+            dispose();
+            new UsuarioFrame();
 
         });
 

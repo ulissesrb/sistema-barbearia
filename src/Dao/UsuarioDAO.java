@@ -142,7 +142,7 @@ public class UsuarioDAO {
     }
 
     public void alterar(Usuario usuario) {
-        String sql = " UPDATE usuarios SET login = ? WHERE idusuarios = ?";
+        String sql = "UPDATE usuarios SET login = ?, senha = ? WHERE idusuarios = ?";
 
         try (
                 Connection conn = Conexao.conectar();
@@ -150,7 +150,8 @@ public class UsuarioDAO {
         ) {
 
             stmt.setString(1, usuario.getLogin());
-            stmt.setInt(2, usuario.getId());
+            stmt.setString(2, usuario.getSenha());
+            stmt.setInt(3, usuario.getId());
 
 
 
@@ -166,5 +167,4 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
     }
-
 }

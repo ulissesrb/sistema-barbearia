@@ -8,6 +8,21 @@ public class UsuarioController {
 
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
+    // Regra para Alterar Usuario
+    public void alterarUsuario(Usuario usuario, String senhaPura) {
+
+        if (senhaPura != null ) {
+            // 1. Criptografa a senha
+            String senhaProtegida = HashUtil.gerarHash(senhaPura);
+
+            //Passa a nova senha para o usuário
+            usuario.setSenha(senhaProtegida);
+        }
+
+        // 3. Manda o DAO salvar
+        usuarioDAO.alterar(usuario);
+    }
+
     // Regra para Cadastrar
     public void cadastrarNovoUsuario(String login, String senhaPura) {
         // 1. Criptografa a senha antes de qualquer coisa
