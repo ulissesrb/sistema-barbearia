@@ -266,7 +266,7 @@ public class UsuarioFrame extends JFrame {
 
             JOptionPane.showMessageDialog(
                     this,
-                    "Fill in all fields."
+                    "Preencha todos os campos."
             );
 
             return;
@@ -287,7 +287,7 @@ public class UsuarioFrame extends JFrame {
 
             JOptionPane.showMessageDialog(
                     this,
-                    "Select a user."
+                    "Selecione um usuário."
             );
 
             return;
@@ -315,7 +315,7 @@ public class UsuarioFrame extends JFrame {
 
             JOptionPane.showMessageDialog(
                     this,
-                    "Select a client."
+                    "Selecione um usuário."
             );
 
             return;
@@ -324,8 +324,8 @@ public class UsuarioFrame extends JFrame {
         int opcao = JOptionPane.showConfirmDialog(
 
                 this,
-                "Delete selected client?",
-                "Confirmation",
+                "Excluir usuário?",
+                "Confirmação",
                 JOptionPane.YES_NO_OPTION
 
         );

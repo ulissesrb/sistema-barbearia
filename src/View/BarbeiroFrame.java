@@ -265,7 +265,7 @@ public class BarbeiroFrame extends JFrame {
 
             JOptionPane.showMessageDialog(
                     this,
-                    "Fill in all fields."
+                    "Preencha todos os campos."
             );
 
             return;
@@ -290,7 +290,7 @@ public class BarbeiroFrame extends JFrame {
 
             JOptionPane.showMessageDialog(
                     this,
-                    "Select a client."
+                    "Selecione um barbeiro."
             );
 
             return;
@@ -316,7 +316,7 @@ public class BarbeiroFrame extends JFrame {
 
             JOptionPane.showMessageDialog(
                     this,
-                    "Select a client."
+                    "Selecione um barbeiro."
             );
 
             return;
@@ -325,8 +325,8 @@ public class BarbeiroFrame extends JFrame {
         int opcao = JOptionPane.showConfirmDialog(
 
                 this,
-                "Delete selected client?",
-                "Confirmation",
+                "Excluir Barbeiro?",
+                "Confirmação",
                 JOptionPane.YES_NO_OPTION
 
         );

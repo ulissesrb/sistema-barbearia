@@ -1,5 +1,8 @@
 package View;
 
+import Controller.AgendamentoController;
+import Exception.NegocioException;
+
 import Dao.AgendamentoDAO;
 import Dao.BarbeiroDAO;
 import Dao.ClienteDAO;
@@ -28,6 +31,10 @@ public class AgendamentoFrame extends JFrame {
     private JLabel lblBarbeiro;
     private JLabel lblData;
     private JLabel lblHora;
+
+    //Controller
+    private final AgendamentoController agendamentoController = new AgendamentoController();
+
 
     // Components
     private JComboBox<Cliente> cbClientes;
@@ -378,15 +385,22 @@ public class AgendamentoFrame extends JFrame {
             agendamento.setData(data);
             agendamento.setHora(hora);
 
-            agendamentoDAO.inserir(agendamento);
+            // Trocou o antigo "agendamentoDAO.inserir(agendamento);"
+            try {
+                // O controller vai testar todas as regras antes de salvar
+                agendamentoController.agendar(agendamento);
+                JOptionPane.showMessageDialog(this, "Agendamento realizado com sucesso!");
 
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Agendamento realizado com sucesso!"
-            );
 
-            carregarTabela();
-            limparCampos();
+                carregarTabela();
+                limparCampos();
+
+            } catch (NegocioException ex) {
+                // Se qualquer regra falhar, o controller joga o erro para cá e a tela exibe de forma amigável
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
 
         } catch (Exception ex) {
 
